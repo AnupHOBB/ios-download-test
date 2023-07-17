@@ -4,10 +4,11 @@ import * as CONSTANTS from './constants.js'
 const sceneType = 'r1'
 
 let importMap = new Map()
-importMap.set('THREE', '../node_modules/three/src/Three.js')
-importMap.set('GLTF','../node_modules/three/examples/jsm/loaders/GLTFLoader.js')
-importMap.set('DRACO','../node_modules/three/examples/jsm/loaders/DRACOLoader.js')
-importMap.set('ENGINE','../engine/Engine.js')
+let origin = extractOrigin(window.location.href)
+importMap.set('THREE', origin+'/node_modules/three/src/Three.js')
+importMap.set('GLTF', origin+'/node_modules/three/examples/jsm/loaders/GLTFLoader.js')
+importMap.set('DRACO', origin+'/node_modules/three/examples/jsm/loaders/DRACOLoader.js')
+importMap.set('ENGINE', origin+'/engine/Engine.js')
 
 window.onload = ()=>loadFiles(sceneType)
 /**
@@ -16,7 +17,7 @@ window.onload = ()=>loadFiles(sceneType)
 function loadFiles(sceneType)
 {
     let pTag = document.querySelector('p')
-    ImportManager.execute(importMap, (name, module, progress) => 
+    execute(importMap, (name, module, progress) => 
     {//Called after successfully importing each module
         showProgress(pTag, Math.round((progress * 33)/100))
         importMap.set(name, module)
@@ -125,3 +126,35 @@ function showScene(THREE)
 }
 
 function showProgress(pTag, progress) { pTag.innerHTML = 'LOADING... '+progress+'%' }
+
+function execute(pathMap, onProgress, onComplete)
+{
+    if (onProgress == undefined)
+        onProgress = (p, s)=>{}
+    if (onComplete == undefined)
+        onComplete = (m)=>{}
+    let names = pathMap.keys()
+    let progress = 0
+    for (let name of names)
+    {    
+        import(pathMap.get(name)).then((module)=>{
+            onProgress(name, module, Math.round((progress++/pathMap.size) * 100))
+            if (progress == pathMap.size)
+                onComplete()
+        })
+    }
+}
+
+function extractOrigin(url)
+{
+    let urlParts = url.split('/')
+    let origin = urlParts[0]
+    for (let i=1; i<urlParts.length; i++)
+    {
+        if (urlParts[i] != 'app')
+            origin += '/' + urlParts[i] 
+        else
+            break
+    }
+    return origin
+}
