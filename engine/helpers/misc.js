@@ -1,5 +1,5 @@
-import { Color } from 'three'
-import { Vector3 } from 'three'
+import { Color } from '../../node_modules/three/src/Three.js'
+import { Vector3 } from '../../node_modules/three/src/Three.js'
 
 export const Misc = 
 {

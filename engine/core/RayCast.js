@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import * as THREE from '../../node_modules/three/src/Three.js'
 
 /**
  * Responsible for raycasting. Ray casting is done here in world space.

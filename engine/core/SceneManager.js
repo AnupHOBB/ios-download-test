@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import * as THREE from '../../node_modules/three/src/Three.js'
 import { RayCast } from './RayCast.js'
 import { SceneRenderer } from './SceneRenderer.js'
 

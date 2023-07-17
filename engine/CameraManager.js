@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import * as THREE from '../node_modules/three/src/Three.js'
 import { SceneObject } from './core/SceneManager.js'
 import { Maths } from './helpers/maths.js'
 import { Matrix } from './helpers/matrix.js'

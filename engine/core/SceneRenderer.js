@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import * as THREE from '../../node_modules/three/src/Three.js'
 import { EffectComposer } from '../../node_modules/three/examples/jsm/postprocessing/EffectComposer.js'
 import { RenderPass } from '../../node_modules/three/examples/jsm/postprocessing/RenderPass.js'
 import { UnrealBloomPass } from '../../node_modules/three/examples/jsm/postprocessing/UnrealBloomPass.js'
