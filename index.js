@@ -6,8 +6,8 @@ const sceneType = 'r1'
 let importMap = new Map()
 let origin = extractOrigin(window.location.href)
 importMap.set('THREE', origin+'/node_modules/three/src/Three.js')
-importMap.set('GLTF', origin+'/node_modules/three/examples/jsm/loaders/GLTFLoader.js')
-importMap.set('DRACO', origin+'/node_modules/three/examples/jsm/loaders/DRACOLoader.js')
+//importMap.set('GLTF', origin+'/node_modules/three/examples/jsm/loaders/GLTFLoader.js')
+//importMap.set('DRACO', origin+'/node_modules/three/examples/jsm/loaders/DRACOLoader.js')
 importMap.set('ENGINE', origin+'/engine/Engine.js')
 
 window.onload = ()=>loadFiles(sceneType)
@@ -27,15 +27,16 @@ function loadFiles(sceneType)
 function loadAssets(sceneType, onProgress)
 {
     let [textureMap, modelMap] = getAssetPaths(sceneType)
-    let GLTF = importMap.get('GLTF')
-    let DRACO = importMap.get('DRACO')
+    //let GLTF = importMap.get('GLTF')
+    //let DRACO = importMap.get('DRACO')
+    console.log('downloaded js files')
     let THREE = importMap.get('THREE')
     let ENGINE = importMap.get('ENGINE')
     let loader = new ENGINE.AssetLoader()
     let textureNames = textureMap.keys()
     for (let textureName of textureNames)
         loader.addLoader(textureName, textureMap.get(textureName), new THREE.TextureLoader())
-    let modelNames = modelMap.keys()
+    /* let modelNames = modelMap.keys()
     for (let modelName of modelNames)
     {    
         let dracoLoader = new DRACO.DRACOLoader()
@@ -43,7 +44,7 @@ function loadAssets(sceneType, onProgress)
         let gltfLoader = new GLTF.GLTFLoader()
         gltfLoader.setDRACOLoader(dracoLoader)
         loader.addLoader(modelName, modelMap.get(modelName), gltfLoader)
-    }
+    } */
     loader.execute(onProgress, assetMap => showScene(THREE))
 }
 
