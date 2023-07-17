@@ -5,10 +5,10 @@ const sceneType = 'r1'
 
 let importMap = new Map()
 let origin = extractOrigin(window.location.href)
-importMap.set('THREE', origin+'/node_modules/three/src/Three.js')
-//importMap.set('GLTF', origin+'/node_modules/three/examples/jsm/loaders/GLTFLoader.js')
-//importMap.set('DRACO', origin+'/node_modules/three/examples/jsm/loaders/DRACOLoader.js')
-importMap.set('ENGINE', origin+'/engine/Engine.js')
+importMap.set('THREE', origin+'node_modules/three/src/Three.js')
+//importMap.set('GLTF', origin+'node_modules/three/examples/jsm/loaders/GLTFLoader.js')
+//importMap.set('DRACO', origin+'node_modules/three/examples/jsm/loaders/DRACOLoader.js')
+importMap.set('ENGINE', origin+'engine/Engine.js')
 
 window.onload = ()=>loadFiles(sceneType)
 /**
